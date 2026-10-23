@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Boda Ale y Marcos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Syne:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #34292a;
+      --bar: #2a2122;
+      --accent: #e39c80;
+      --text: #e8cdbd;
+      --text-strong: #f6e6da;
+      --pill: #4d3d3a;
+      --pill-solid: #e39c80;
+      --font-sans: "Syne", system-ui, sans-serif;
+      --font-serif: "Cormorant Garamond", Georgia, serif;
+      --nav-h: 68px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      overflow-x: hidden;
+    }
+
+    /* ---------- Barra superior ---------- */
+    .nav {
+      position: fixed; inset: 0 0 auto 0; height: var(--nav-h);
+      background: var(--bar);
+      display: flex; justify-content: flex-end; align-items: center;
+      gap: clamp(18px, 3vw, 44px);
+      padding: 0 clamp(16px, 3vw, 40px);
+      z-index: 10;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, .06);
+    }
+    .nav a {
+      color: var(--text); text-decoration: none; opacity: .75;
+      font-size: 17px; letter-spacing: .04em; white-space: nowrap;
+    }
+    .nav a:hover { opacity: 1; }
+    .nav a.active { opacity: 1; color: var(--accent); font-weight: 600; }
+
+    /* ---------- Fondo floral fijo ---------- */
+    .florals { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    .florals svg { position: absolute; width: clamp(180px, 28vw, 440px); height: auto; }
+    .florals .tl { top: var(--nav-h); left: 0; }
+    .florals .tr { top: var(--nav-h); right: 0; transform: scaleX(-1); opacity: .4; }
+    .florals .bl { bottom: 0; left: 0; transform: scaleY(-1); }
+    .florals .br { bottom: 0; right: 0; transform: scale(-1, -1); }
+
+    /* ---------- Secciones ---------- */
+    section {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      padding: calc(var(--nav-h) + 40px) 24px 40px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center;
+    }
+
+    h1, h2, h3 { font-weight: 500; }
+    .sans-title {
+      font-family: var(--font-sans); font-weight: 400;
+      font-size: clamp(34px, 6vw, 76px); letter-spacing: .04em;
+      color: var(--text-strong);
+    }
+    .serif-title {
+      font-family: var(--font-serif); font-weight: 500;
+      font-size: clamp(30px, 4.2vw, 56px);
+      color: var(--text-strong); letter-spacing: -.01em;
+    }
+
+    /* Portada */
+    .hero-row {
+      display: flex; align-items: center; justify-content: center;
+      gap: clamp(24px, 9vw, 150px); flex-wrap: wrap; margin-top: clamp(24px, 6vh, 70px);
+      max-width: 100%;
+    }
+    .names {
+      font-family: var(--font-serif); font-weight: 600; color: var(--accent);
+      font-size: clamp(64px, 11vw, 150px); line-height: .95; text-align: left;
+    }
+    .date {
+      display: flex; align-items: center; gap: 12px; color: var(--text);
+      font-size: clamp(18px, 2.6vw, 34px); letter-spacing: .08em; font-weight: 400;
+    }
+    .date .bar { width: 2px; height: 1.9em; background: var(--accent); }
+
+    /* Nuestra boda */
+    .events {
+      display: flex; gap: clamp(40px, 11vw, 190px); justify-content: center; flex-wrap: wrap;
+      margin: clamp(28px, 6vh, 70px) 0;
+    }
+    .event { display: flex; flex-direction: column; align-items: center; }
+    .event svg.icon { width: 110px; height: 90px; margin-bottom: 8px; }
+    .event h3 { font-family: var(--font-serif); font-size: clamp(32px, 3.4vw, 46px); color: var(--text-strong); margin-bottom: 10px; }
+    .event p { font-size: clamp(15px, 1.6vw, 20px); line-height: 1.9; }
+
+    .pill {
+      display: inline-block; margin-top: 22px; padding: 10px 18px;
+      background: var(--pill); color: var(--text-strong);
+      border-radius: 999px; text-decoration: underline;
+      font-size: clamp(14px, 1.5vw, 18px); transition: background .2s;
+    }
+    .pill:hover { background: var(--pill-solid); }
+    .event .pill { background: var(--pill-solid); color: #2a1a14; }
+
+    /* Dress code */
+    .icon { color: var(--accent); }
+    .catering { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .catering p { font-size: 13px; letter-spacing: .25em; text-transform: uppercase; opacity: .8; }
+    .catering img { width: clamp(150px, 22vw, 220px); height: auto; opacity: .92; }
+    .dress .serif-title { line-height: 1.25; }
+    .dress .lead { margin-top: 18px; }
+    .pill-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 36px; }
+    .pill-row .pill { margin-top: 0; min-width: 120px; background: var(--pill-solid); color: #2a1a14; text-decoration: none; font-weight: 500; }
+    .pill-row .pill:hover { filter: brightness(1.08); }
+    .dress svg.icon { width: 210px; height: auto; margin-top: 22px; }
+
+
+    /* ---------- Intro ---------- */
+    body.locked { overflow: hidden; }
+    .intro {
+      position: fixed; inset: 0; z-index: 100;
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      transition: opacity .9s ease, transform .9s ease, visibility 0s linear .9s;
+    }
+    .intro.hide { opacity: 0; transform: translateY(-24px); visibility: hidden; pointer-events: none; }
+    .intro .florals { position: absolute; }
+    .intro .florals .tl, .intro .florals .tr { top: 0; }
+    .intro-inner { position: relative; z-index: 1; padding: 24px; animation: rise 1.2s ease both; }
+    .intro-top { font-size: clamp(16px, 2vw, 22px); letter-spacing: .3em; text-transform: uppercase; }
+    .intro-names {
+      font-family: var(--font-serif); font-weight: 600; color: var(--accent);
+      font-size: clamp(60px, 13vw, 170px); line-height: .95; margin: 18px 0 14px;
+    }
+    .intro-date { font-size: clamp(16px, 2vw, 24px); letter-spacing: .18em; margin-bottom: 36px; }
+    .intro button {
+      font: inherit; font-size: 17px; cursor: pointer; border: 0;
+      background: var(--pill-solid); color: #2a1a14;
+      padding: 14px 30px; border-radius: 999px; letter-spacing: .05em;
+      transition: transform .2s, filter .2s;
+    }
+    .intro button:hover { transform: translateY(-2px); filter: brightness(1.08); }
+    @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { .intro, .intro-inner { transition: none; animation: none; } }
+
+    @media (max-width: 720px) {
+      .nav { justify-content: flex-start; overflow-x: auto; }
+      .nav a { font-size: 15px; }
+      .names { text-align: center; }
+      .date { font-size: 18px; gap: 8px; white-space: nowrap; }
+      .events { gap: 48px; }
+      .florals svg { width: 150px; }
+      section { min-height: 100svh; }
+    }
+  </style>
+</head>
+<body class="locked">
+
+  <!-- Símbolo reutilizable: esquina con flores en acuarela -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <filter id="soft"><feGaussianBlur stdDeviation="14"/></filter>
+      <filter id="paint">
+        <feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="4" result="n"/>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="9"/>
+      </filter>
+      <radialGradient id="wash"><stop offset="0" stop-color="#e39c80" stop-opacity=".2"/><stop offset="1" stop-color="#e39c80" stop-opacity="0"/></radialGradient>
+      <radialGradient id="petalA" cx="50%" cy="50%" r="60%">
+        <stop offset="0" stop-color="#f7b890"/><stop offset="1" stop-color="#ee8a5c"/>
+      </radialGradient>
+      <radialGradient id="petalB" cx="50%" cy="50%" r="60%">
+        <stop offset="0" stop-color="#ee9a85"/><stop offset="1" stop-color="#d4604a"/>
+      </radialGradient>
+
+      <symbol id="corner" viewBox="0 0 440 440">
+        <!-- mancha de acuarela -->
+        <ellipse cx="150" cy="170" rx="210" ry="200" fill="url(#wash)"/>
+        <g filter="url(#paint)">
+          <!-- ramas -->
+          <g fill="none" stroke="#c4572f" stroke-width="3" stroke-linecap="round">
+            <path d="M120 60 C150 110 140 170 100 230 S70 320 90 370"/>
+            <path d="M150 90 C210 100 250 130 300 170"/>
+            <path d="M105 200 C60 215 40 250 25 290"/>
+          </g>
+          <!-- hojas -->
+          <g fill="#c9a36a" opacity=".85">
+            <ellipse cx="300" cy="172" rx="26" ry="9" transform="rotate(35 300 172)"/>
+            <ellipse cx="250" cy="130" rx="22" ry="8" transform="rotate(25 250 130)"/>
+            <ellipse cx="40" cy="285" rx="22" ry="8" transform="rotate(-60 40 285)"/>
+            <ellipse cx="95" cy="365" rx="20" ry="8" transform="rotate(-80 95 365)"/>
+          </g>
+          <!-- capullos -->
+          <g fill="#e07a5a" opacity=".9">
+            <ellipse cx="125" cy="260" rx="9" ry="16" transform="rotate(-20 125 260)"/>
+            <ellipse cx="80" cy="310" rx="8" ry="14" transform="rotate(15 80 310)"/>
+            <ellipse cx="190" cy="115" rx="9" ry="15" transform="rotate(60 190 115)"/>
+            <ellipse cx="270" cy="150" rx="8" ry="13" transform="rotate(50 270 150)"/>
+          </g>
+          <!-- flor grande -->
+          <g>
+            <circle cx="55" cy="45" r="70" fill="url(#petalA)" opacity=".85"/>
+            <circle cx="95" cy="75" r="45" fill="url(#petalB)" opacity=".75"/>
+            <circle cx="30" cy="70" r="40" fill="#f6a371" opacity=".8"/>
+            <circle cx="60" cy="40" r="20" fill="#fbd7a8" opacity=".9"/>
+          </g>
+          <!-- flor pequeña -->
+          <g>
+            <circle cx="205" cy="70" r="30" fill="url(#petalB)" opacity=".8"/>
+            <circle cx="225" cy="85" r="20" fill="#f08a6c" opacity=".8"/>
+          </g>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
+  <div class="intro" id="intro">
+    <div class="florals" aria-hidden="true">
+      <svg class="tl"><use href="#corner"/></svg>
+      <svg class="tr"><use href="#corner"/></svg>
+      <svg class="bl"><use href="#corner"/></svg>
+      <svg class="br"><use href="#corner"/></svg>
+    </div>
+    <div class="intro-inner">
+      <p class="intro-top">Nos casamos!</p>
+      <div class="intro-names">Maru &amp;<br>Charly</div>
+      <p class="intro-date">05 · 12 · 2026</p>
+      <button type="button" id="open">Abrir invitación</button>
+    </div>
+  </div>
+
+  <div class="florals" aria-hidden="true">
+    <svg class="tl"><use href="#corner"/></svg>
+    <svg class="tr"><use href="#corner"/></svg>
+    <svg class="bl"><use href="#corner"/></svg>
+    <svg class="br"><use href="#corner"/></svg>
+  </div>
+
+  <nav class="nav">
+    <a href="#inicio" class="active">Boda Maru y Charly</a>
+    <a href="#boda">Nuestra boda</a>
+    <a href="#menu">Menú</a>
+    <a href="#dresscode">Dress code</a>
+  </nav>
+
+  <!-- ===== Portada ===== -->
+  <section id="inicio">
+    <h1 class="sans-title">Nos casamos!</h1>
+    <div class="hero-row">
+      <div class="names">Maru &amp;<br>Charly</div>
+      <div class="date"><span>DIC</span><span class="bar"></span><span>05</span><span class="bar"></span><span>2026</span></div>
+    </div>
+  </section>
+
+  <!-- ===== Nuestra boda ===== -->
+  <section id="boda">
+    <h2 class="serif-title">Bienvenidos a nuestra boda!</h2>
+
+    <div class="events">
+      <div class="event">
+        <svg class="icon" viewBox="0 0 120 90" fill="currentColor" aria-hidden="true">
+          <defs>
+            <g id="flute">
+              <path d="M-10 -32 H10 L8 -7 Q0 3 -8 -7 Z"/>
+              <rect x="-1.4" y="-4" width="2.8" height="28"/>
+              <ellipse cy="25" rx="10" ry="2.8"/>
+            </g>
+            <path id="spark" d="M0 -7 Q0 0 7 0 Q0 0 0 7 Q0 0 -7 0 Q0 0 0 -7Z"/>
+          </defs>
+          <use href="#flute" transform="translate(42 54) rotate(16)"/>
+          <use href="#flute" transform="translate(78 54) rotate(-16)"/>
+          <use href="#spark" transform="translate(60 12) scale(1.3)"/>
+          <use href="#spark" transform="translate(28 18)"/>
+          <use href="#spark" transform="translate(94 22) scale(.8)"/>
+        </svg>
+        <h3>Fiesta</h3>
+        <p>1 de abril<br>19:00<br>Olay's Eventos</p>
+        <a class="pill" href="https://maps.app.goo.gl/gRyU1UjJ6qdCcoqd6" target="_blank" rel="noopener">Como llegar a la fiesta</a>
+      </div>
+    </div>
+
+    <h2 class="serif-title" style="font-size:clamp(26px,3vw,40px)">Te esperamos!</h2>
+  </section>
+
+  <!-- ===== Menú ===== -->
+  <section id="menu">
+    <h2 class="serif-title">Y para comer...</h2>
+
+    <div class="events">
+      <div class="event">
+        <svg class="icon" viewBox="0 0 100 90" fill="currentColor" aria-hidden="true">
+          <ellipse cx="62" cy="34" rx="28" ry="22" transform="rotate(-35 62 34)"/>
+          <path d="M44 52 L24 72" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+          <circle cx="16" cy="70" r="6"/><circle cx="26" cy="80" r="6"/>
+        </svg>
+        <h3>Entrada</h3>
+        <p>Pollo frito con 3 salsas<br>Sándwiches de miga</p>
+      </div>
+
+      <div class="event">
+        <svg class="icon" viewBox="0 0 100 90" fill="currentColor" aria-hidden="true">
+          <path d="M10 26 Q50 2 90 26" fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>
+          <path d="M16 34 L50 86 L84 34 Z"/>
+          <g style="fill:var(--bg)"><circle cx="38" cy="46" r="5"/><circle cx="62" cy="46" r="5"/><circle cx="50" cy="66" r="5"/></g>
+        </svg>
+        <h3>Plato principal</h3>
+        <p>Pizzas variadas<br>Muzzarella, napolitana,<br>fugazzeta rellena y más</p>
+      </div>
+    </div>
+
+    <div class="catering">
+      <p>Catering a cargo de</p>
+      <img src="img/crisis-logo.png" alt="Crisis" width="606" height="195">
+    </div>
+  </section>
+
+  <!-- ===== Dress code ===== -->
+  <section id="dresscode" class="dress">
+    <h2 class="serif-title">Ahora que me pongo a pensar...<br>Como voy vestido/a?</h2>
+    <p class="serif-title lead" style="font-size:clamp(24px,3vw,40px)">Tranqui tranqui, ya buscamos ideitas que te pueden ayudar.</p>
+
+    <svg class="icon" viewBox="0 0 200 190" fill="currentColor" aria-hidden="true">
+      <!-- Ellos: saco con moño -->
+      <g>
+        <path d="M60 28 V20 Q60 12 67 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <path d="M60 28 L24 50 M60 28 L96 50" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <path d="M26 52 L48 44 L60 92 L72 44 L94 52 L100 150 H20 Z"/>
+        <path d="M50 46 L60 84 L70 46 L60 56 Z" style="fill:var(--bg)"/>
+        <path d="M60 54 L49 47 V61 Z M60 54 L71 47 V61 Z"/>
+        <circle cx="60" cy="54" r="3"/>
+        <circle cx="60" cy="108" r="2.6" style="fill:var(--bg)"/><circle cx="60" cy="126" r="2.6" style="fill:var(--bg)"/>
+      </g>
+      <!-- Ellas: vestido -->
+      <g>
+        <path d="M140 28 V20 Q140 12 147 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <path d="M140 28 L112 46 M140 28 L168 46" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <path d="M122 46 L128 46 L132 66 H148 L152 46 L158 46 L156 90 L180 172 Q140 184 100 172 L124 90 Z"/>
+        <path d="M125 92 H155" fill="none" stroke-width="3.5" style="stroke:var(--bg)"/>
+      </g>
+    </svg>
+
+    <div class="pill-row">
+      <a class="pill" href="https://ar.pinterest.com/search/pins/?q=dresscode%20elegante%20sport&amp;rs=rs&amp;source_id=rs_GT4SzugF&amp;top_pin_ids=837458493252583599&amp;eq=&amp;etslf=2312" target="_blank" rel="noopener">Ellos</a>
+      <a class="pill" href="https://ar.pinterest.com/search/pins/?q=dresscode%20elegante%20sport%20mujer&amp;rs=ac&amp;len=24&amp;source_id=ac_udVuAfFc&amp;eq=dresscode%20elegante%20sport&amp;etslf=1744" target="_blank" rel="noopener">Ellas</a>
+    </div>
+  </section>
+
+  <script>
+    // Intro: al abrir, se desvanece y se libera el scroll
+    const intro = document.getElementById('intro');
+    document.getElementById('open').addEventListener('click', () => {
+      intro.classList.add('hide');
+      document.body.classList.remove('locked');
+    });
+
+    // Resalta el link de la sección visible
+    const links = [...document.querySelectorAll('.nav a')];
+    const sections = links.map(a => document.querySelector(a.getAttribute('href')));
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach(s => io.observe(s));
+  </script>
+</body>
+</html>
