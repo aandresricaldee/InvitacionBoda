@@ -153,8 +153,8 @@
     @media (prefers-reduced-motion: reduce) { .intro, .intro-inner { transition: none; animation: none; } }
 
     @media (max-width: 720px) {
-      .nav { justify-content: flex-start; overflow-x: auto; }
-      .nav a { font-size: 15px; }
+      .nav { justify-content: space-between; gap: 8px; padding: 0 14px; }
+      .nav a { font-size: clamp(11px, 3.4vw, 15px); letter-spacing: 0; }
       .names { text-align: center; }
       .date { font-size: 18px; gap: 8px; white-space: nowrap; }
       .events { gap: 48px; }
@@ -282,7 +282,7 @@
           <use href="#spark" transform="translate(94 22) scale(.8)"/>
         </svg>
         <h3>Fiesta</h3>
-        <p>1 de abril<br>19:00<br>Olay's Eventos</p>
+        <p>5 de abril<br>21:00<br>Olay's Eventos</p>
         <a class="pill" href="https://maps.app.goo.gl/gRyU1UjJ6qdCcoqd6" target="_blank" rel="noopener">Como llegar a la fiesta</a>
       </div>
     </div>
