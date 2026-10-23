@@ -282,7 +282,7 @@
           <use href="#spark" transform="translate(94 22) scale(.8)"/>
         </svg>
         <h3>Fiesta</h3>
-        <p>5 de abril<br>21:00<br>Olay's Eventos</p>
+        <p>5 de Diciembre<br>21:00<br>Olay's Eventos<br>DJ Chelo</p>
         <a class="pill" href="https://maps.app.goo.gl/gRyU1UjJ6qdCcoqd6" target="_blank" rel="noopener">Como llegar a la fiesta</a>
       </div>
     </div>
@@ -356,7 +356,12 @@
   <script>
     // Intro: al abrir, se desvanece y se libera el scroll
     const intro = document.getElementById('intro');
+    // Evita que el navegador restaure la posición anterior al recargar
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     document.getElementById('open').addEventListener('click', () => {
+      // Siempre arranca desde la primera sección (sin hash ni scroll previo)
+      history.replaceState(null, '', location.pathname + location.search);
+      window.scrollTo({ top: 0, behavior: 'instant' });
       intro.classList.add('hide');
       document.body.classList.remove('locked');
     });
