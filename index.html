@@ -116,6 +116,10 @@
     .catering { display: flex; flex-direction: column; align-items: center; gap: 14px; }
     .catering p { font-size: 13px; letter-spacing: .25em; text-transform: uppercase; opacity: .8; }
     .catering img { width: clamp(150px, 22vw, 220px); height: auto; opacity: .92; }
+    .catering .price { margin-top: 22px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .catering .price h3 { font-family: var(--font-serif); font-size: clamp(24px, 2.6vw, 32px); color: var(--text-strong); }
+    .catering .price p { font-family: var(--font-serif); font-variant-numeric: lining-nums; font-weight: 600; font-size: clamp(26px, 2.8vw, 36px); letter-spacing: .02em; text-transform: none; opacity: 1; color: var(--accent); }
+    .catering .price p.price-late { font-weight: 500; font-size: clamp(18px, 2vw, 24px); color: var(--text); }
     .dress .serif-title { line-height: 1.25; }
     .dress .lead { margin-top: 18px; }
     .pill-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 36px; }
@@ -319,6 +323,11 @@
     <div class="catering">
       <p>Catering a cargo de</p>
       <img src="img/crisis-logo.png" alt="Crisis" width="606" height="195">
+      <div class="price">
+        <h3>Valor de la tarjeta</h3>
+        <p>$22.000</p>
+        <p class="price-late">Después de las 00hs: $10.000</p>
+      </div>
     </div>
   </section>
 
