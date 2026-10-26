@@ -109,6 +109,8 @@
       font-size: clamp(14px, 1.5vw, 18px); transition: background .2s;
     }
     .pill:hover { background: var(--pill-solid); }
+    /* El PNG es blanco sobre negro con mucho margen: screen elimina el negro y el margin negativo recorta el espacio vacío */
+    .event .dj-logo { width: clamp(160px, 20vw, 210px); height: auto; margin: -34px 0 -26px; mix-blend-mode: screen; }
     .event .pill { background: var(--pill-solid); color: #2a1a14; }
 
     /* Dress code */
@@ -289,6 +291,7 @@
         </svg>
         <h3>Fiesta</h3>
         <p>5 de Diciembre<br>21:00<br>Olay's Eventos<br>DJ Chelo</p>
+        <img class="dj-logo" src="img/dj-chelo-logo.png" alt="DJ Chelo" width="1080" height="1080">
         <a class="pill" href="https://maps.app.goo.gl/gRyU1UjJ6qdCcoqd6" target="_blank" rel="noopener">Como llegar a la fiesta</a>
       </div>
     </div>
